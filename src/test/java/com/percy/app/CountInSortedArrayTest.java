@@ -22,7 +22,8 @@ public class CountInSortedArrayTest {
     array = new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
     k = 4;
   }
-   @Test
+
+  @Test
   public void testIndex(){
     for(int i=0; i!=array.length; i++) {
       assertEquals(9 - i, CountInSortedArray.index(array, i));
