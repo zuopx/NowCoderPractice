@@ -121,8 +121,8 @@ public class TravelTree {
   }
 
   /**
-   * 后序遍历的递归算法不是尾递归，比较复杂。
-   * 可以观察到后序遍历的结果和先序遍历的结果正好顺序相反。
+   * 后序遍历的递归算法不是尾递归，比较复杂。 可以观察到后序遍历的结果和先序遍历的结果正好顺序相反。
+   * 
    * @param root
    */
   public static void postOrderIteration(TreeNode root) {
@@ -140,7 +140,7 @@ public class TravelTree {
   }
 
   public static void inOrder(TreeNode root) {
-    if(root != null){
+    if (root != null) {
       inOrder(root.left);
       list.add(root.val);
       inOrder(root.right);
@@ -150,18 +150,44 @@ public class TravelTree {
   public static void inOrderIteration(TreeNode root) {
     Stack<TreeNode> stack = new Stack<>();
     stack.push(root);
-    while(!stack.isEmpty()){
+    while (!stack.isEmpty()) {
       TreeNode current = stack.peek();
-      if(current!=null){
-          stack.push(current.left);
+      if (current != null) {
+        stack.push(current.left);
       } else {
         stack.pop();
-        if(!stack.isEmpty()){
+        if (!stack.isEmpty()) {
           current = stack.pop();
           list.add(current.val);
           stack.push(current.right);
         }
       }
     }
+  }
+
+  /**
+   * 请找出中序遍历顺序的下一个结点
+   * 
+   * @param node
+   * @return
+   */
+  public static TreeLinkNode getNext(TreeLinkNode node) {
+    if (node == null) {
+      return null;
+    }
+    TreeLinkNode next = null;
+    if (node.right != null) {
+      next = node.right;
+      while (next.left != null) {
+        next = next.left;
+      }
+    } else {
+      next = node;
+      while (next.parent != null && next.equals(next.parent.right)) {
+        next = next.parent;
+      }
+      next = next.parent;
+    }
+    return next;
   }
 }

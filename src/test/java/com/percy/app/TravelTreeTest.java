@@ -15,7 +15,7 @@ import org.junit.Test;
  * TravelTreeTest
  */
 public class TravelTreeTest {
-  
+
   TreeNode root = null;
 
   @Before
@@ -25,7 +25,7 @@ public class TravelTreeTest {
     for (int i = 0; i != treeSize; i++) {
       completeBinaryTree[i] = new TreeNode(i);
     }
-    for (int i=0; i != treeSize /2; i++) {
+    for (int i = 0; i != treeSize / 2; i++) {
       completeBinaryTree[i].left = completeBinaryTree[2 * i + 1];
       if (2 * i + 2 <= treeSize - 1) {
         completeBinaryTree[i].right = completeBinaryTree[2 * i + 2];
@@ -56,40 +56,65 @@ public class TravelTreeTest {
   }
 
   @Test
-  public void testPreOrder(){
+  public void testPreOrder() {
     TravelTree.preOrder(root);
     System.out.println(TravelTree.list.toString());
     assertTrue(true);
   }
 
   @Test
-  public void testPreOrderIteration(){
+  public void testPreOrderIteration() {
     TravelTree.preOrderIteration(root);
     System.out.println(TravelTree.list.toString());
     assertTrue(true);
   }
 
   @Test
-  public void testPostOrder(){
+  public void testPostOrder() {
     TravelTree.postOrder(root);
     System.out.println(TravelTree.list.toString());
   }
 
   @Test
-  public void testPostOrderIteration(){
+  public void testPostOrderIteration() {
     TravelTree.postOrderIteration(root);
     System.out.println(TravelTree.list.toString());
   }
 
   @Test
-  public void testInOrder(){
+  public void testInOrder() {
     TravelTree.inOrder(root);
     System.out.println(TravelTree.list.toString());
   }
 
   @Test
-  public void testInOrderIteration(){
+  public void testInOrderIteration() {
     TravelTree.inOrderIteration(root);
     System.out.println(TravelTree.list.toString());
+  }
+
+  @Test
+  public void testGetNext() {
+    int treeSize = 10;
+    TreeLinkNode[] completeBinaryTree = new TreeLinkNode[treeSize];
+    for (int i = 0; i != treeSize; i++) {
+      completeBinaryTree[i] = new TreeLinkNode(i);
+    }
+    for (int i = 0; i != treeSize / 2; i++) {
+      completeBinaryTree[i].left = completeBinaryTree[2 * i + 1];
+      completeBinaryTree[2 * i + 1].parent = completeBinaryTree[i];
+      if (2 * i + 2 <= treeSize - 1) {
+        completeBinaryTree[i].right = completeBinaryTree[2 * i + 2];
+        completeBinaryTree[2 * i + 2].parent = completeBinaryTree[i];
+      }
+    }
+    for (TreeLinkNode var : completeBinaryTree) {
+      TreeLinkNode next = TravelTree.getNext(var);
+      if(next == null){
+        System.out.println(var.val + ":" + "#");
+      }else{
+        System.out.println(var.val + ":" + next.val);
+      }
+    }
   }
 }
