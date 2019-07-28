@@ -76,6 +76,12 @@ public class TravelTreeTest {
   }
 
   @Test
+  public void testPostOrderIteration(){
+    TravelTree.postOrderIteration(root);
+    System.out.println(TravelTree.list.toString());
+  }
+
+  @Test
   public void testInOrder(){
     TravelTree.inOrder(root);
     System.out.println(TravelTree.list.toString());

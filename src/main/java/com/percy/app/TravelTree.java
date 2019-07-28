@@ -9,6 +9,7 @@
 package com.percy.app;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -120,11 +121,22 @@ public class TravelTree {
   }
 
   /**
-   * 
+   * 后序遍历的递归算法不是尾递归，比较复杂。
+   * 可以观察到后序遍历的结果和先序遍历的结果正好顺序相反。
    * @param root
    */
   public static void postOrderIteration(TreeNode root) {
-
+    Stack<TreeNode> stack = new Stack<>();
+    stack.push(root);
+    while (!stack.isEmpty()) {
+      TreeNode current = stack.pop();
+      if (current != null) {
+        list.add(current.val);
+        stack.push(current.left);
+        stack.push(current.right);
+      }
+    }
+    Collections.reverse(list);
   }
 
   public static void inOrder(TreeNode root) {
