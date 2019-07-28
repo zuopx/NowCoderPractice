@@ -1,5 +1,9 @@
 /**
  * Todo: all kinds of binary tree travel algorithms.
+ * 树是图的特例。
+ * 图的遍历算法主要有广度优先遍历和深度优先遍历。
+ * 树的遍历算法有前序遍历，中序遍历和后序遍历，以及层次遍历。
+ * 默认用递归实现，重点在于理解其迭代算法。
  */
 
 package com.percy.app;
@@ -8,11 +12,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * TravelTree
  */
 public class TravelTree {
+
+  static List<Integer> list = new ArrayList<>();
 
   /**
    * 1. The hierarchy traversal of the tree. 1. breadth-first traversal 2. If
@@ -76,5 +83,73 @@ public class TravelTree {
       }
     }
     return list;
+  }
+
+  public static void preOrder(TreeNode root) {
+    if (root != null) {
+      list.add(root.val);
+      preOrder(root.left);
+      preOrder(root.right);
+    }
+  }
+
+  /**
+   * 先序遍历的非递归算法就是深度优先遍历算法。
+   * 
+   * @param root
+   */
+  public static void preOrderIteration(TreeNode root) {
+    Stack<TreeNode> stack = new Stack<>();
+    stack.push(root);
+    while (!stack.isEmpty()) {
+      TreeNode current = stack.pop();
+      if (current != null) {
+        list.add(current.val);
+        stack.push(current.right);
+        stack.push(current.left);
+      }
+    }
+  }
+
+  public static void postOrder(TreeNode root) {
+    if (root != null) {
+      postOrder(root.left);
+      postOrder(root.right);
+      list.add(root.val);
+    }
+  }
+
+  /**
+   * 
+   * @param root
+   */
+  public static void postOrderIteration(TreeNode root) {
+
+  }
+
+  public static void inOrder(TreeNode root) {
+    if(root != null){
+      inOrder(root.left);
+      list.add(root.val);
+      inOrder(root.right);
+    }
+  }
+
+  public static void inOrderIteration(TreeNode root) {
+    Stack<TreeNode> stack = new Stack<>();
+    stack.push(root);
+    while(!stack.isEmpty()){
+      TreeNode current = stack.peek();
+      if(current!=null){
+          stack.push(current.left);
+      } else {
+        stack.pop();
+        if(!stack.isEmpty()){
+          current = stack.pop();
+          list.add(current.val);
+          stack.push(current.right);
+        }
+      }
+    }
   }
 }

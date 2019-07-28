@@ -20,7 +20,7 @@ public class TravelTreeTest {
 
   @Before
   public void setUp() {
-    int treeSize = 100;
+    int treeSize = 10;
     TreeNode[] completeBinaryTree = new TreeNode[treeSize];
     for (int i = 0; i != treeSize; i++) {
       completeBinaryTree[i] = new TreeNode(i);
@@ -53,5 +53,37 @@ public class TravelTreeTest {
     List<List<Integer>> list = TravelTree.hierarchyTraversalV3(root);
     System.out.println(list.toString());
     assertTrue(true);
+  }
+
+  @Test
+  public void testPreOrder(){
+    TravelTree.preOrder(root);
+    System.out.println(TravelTree.list.toString());
+    assertTrue(true);
+  }
+
+  @Test
+  public void testPreOrderIteration(){
+    TravelTree.preOrderIteration(root);
+    System.out.println(TravelTree.list.toString());
+    assertTrue(true);
+  }
+
+  @Test
+  public void testPostOrder(){
+    TravelTree.postOrder(root);
+    System.out.println(TravelTree.list.toString());
+  }
+
+  @Test
+  public void testInOrder(){
+    TravelTree.inOrder(root);
+    System.out.println(TravelTree.list.toString());
+  }
+
+  @Test
+  public void testInOrderIteration(){
+    TravelTree.inOrderIteration(root);
+    System.out.println(TravelTree.list.toString());
   }
 }
